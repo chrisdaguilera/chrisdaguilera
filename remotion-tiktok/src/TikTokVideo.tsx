@@ -22,6 +22,8 @@ import {
   spring,
   AbsoluteFill,
   Sequence,
+  Audio,
+  staticFile,
 } from "remotion";
 import { GlitchText } from "./components/GlitchText";
 import { Terminal } from "./components/Terminal";
@@ -620,6 +622,7 @@ export const TikTokVideo: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ fontFamily: "Arial, sans-serif" }}>
+      <Audio src={staticFile("beat.wav")} volume={0.85} />
       <Background />
 
       {/* Scene 1: Hook  (0–90) */}
