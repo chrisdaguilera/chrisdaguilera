@@ -1,4 +1,5 @@
 node_modules/
-out/
 .remotion/
 dist/
+out/*.png
+out/*.jpg
