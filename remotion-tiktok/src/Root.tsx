@@ -4,6 +4,7 @@ import { TikTokVideo } from "./TikTokVideo";
 import { InsulationTikTok } from "./InsulationTikTok";
 import { InsulationTikTok2 } from "./InsulationTikTok2";
 import { InsulationTikTok3 } from "./InsulationTikTok3";
+import { InsulationTikTok4 } from "./InsulationTikTok4";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -11,5 +12,6 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="InsulationTikTok"  component={InsulationTikTok}  durationInFrames={450} fps={30} width={1080} height={1920} defaultProps={{}} />
     <Composition id="InsulationTikTok2" component={InsulationTikTok2} durationInFrames={450} fps={30} width={1080} height={1920} defaultProps={{}} />
     <Composition id="InsulationTikTok3" component={InsulationTikTok3} durationInFrames={540} fps={30} width={1080} height={1920} defaultProps={{}} />
+    <Composition id="InsulationTikTok4" component={InsulationTikTok4} durationInFrames={480} fps={30} width={1080} height={1920} defaultProps={{}} />
   </>
 );

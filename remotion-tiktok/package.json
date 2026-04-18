@@ -8,6 +8,8 @@
     "build": "remotion render TikTokVideo out/viral-tiktok.mp4 --codec=h264"
   },
   "dependencies": {
+    "@remotion/google-fonts": "^4.0.448",
+    "@remotion/noise": "^4.0.448",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remotion": "4.0.448"
