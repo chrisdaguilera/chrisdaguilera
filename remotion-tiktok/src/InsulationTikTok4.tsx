@@ -399,7 +399,7 @@ const PhotoOrFallback: React.FC<{ frame: number; durFrames: number }> = ({ frame
   return (
     <AbsoluteFill style={{ overflow: "hidden", backgroundColor: "#000" }}>
       <Img
-        src={staticFile("real-job-1.jpg")}
+        src={staticFile("IMG_9588.jpeg")}
         onError={() => setErr(true)}
         style={{
           width: "100%", height: "100%", objectFit: "cover",
