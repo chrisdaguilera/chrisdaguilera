@@ -1,0 +1,71 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://www.idealinsulationinc.com/services/spray-foam-insulation-naples-swfl/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does spray foam insulation cost in Naples, FL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For a typical Naples-area home, spray foam attic projects run roughly $2.50–$4.50 per square foot for open-cell and $4.00–$7.00 per square foot for closed-cell. The exact price depends on attic square footage, accessibility, desired R-value, and whether old insulation needs to be removed first. Free in-home estimates and thermal scans are included."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does spray foam insulation qualify for the FPL rebate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. As an FPL Preferred Insulation Contractor, Ideal Insulation processes the $220 instant ceiling-insulation rebate at the time of installation, as long as the existing attic R-value is below R-8. We handle the paperwork — you see the credit applied directly to your invoice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Open-cell vs. closed-cell spray foam — which is right for a Florida home?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open-cell is lighter, costs less, and works well for interior walls and most attic applications. Closed-cell is denser, has a higher R-value per inch, blocks moisture, and adds structural rigidity to the roof deck — important for hurricane resilience in SWFL. After Hurricanes Ian and Milton, spray-foamed roof decks held up notably better than conventionally insulated ones. For coastal Naples and Marco Island homes, closed-cell on the roof deck is often worth the upgrade."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can I save on my AC bill with spray foam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most Naples-area homeowners see AC bills drop by 25–40% after a properly installed attic spray foam upgrade. After spray foam, energy costs typically drop to $1,800–$2,800 per year, saving $900–$1,400 annually compared to under-insulated homes — every year, for the 20+ year lifespan of the foam."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does spray foam insulation qualify for the 30% federal tax credit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Qualifying insulation upgrades, including spray foam, are eligible for the federal Energy Efficient Home Improvement Credit (Section 25C) — up to 30% of the cost, with an annual cap. We provide the documentation you need at tax time, including the manufacturer certification and itemized invoice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does spray foam insulation take to install?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most attic spray foam jobs are completed in a single day. We arrive in the morning with our own crew (no subcontractors), prep the work area, install the foam, and clean up — you have your home back the same evening. Larger or commercial projects may run 2–3 days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is spray foam insulation safe? Can I stay in the house during installation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Modern spray foam is fully cured and inert within 24 hours. Our crews use respirators and OSHA-compliant containment during install. We recommend you and any pets stay out of the work zone during application and for several hours after, and keep ventilation running. Once cured, the foam is safe to live with for the life of the home."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you serve Fort Myers, Cape Coral, and Marco Island in addition to Naples?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We serve all of Southwest Florida — Naples, Fort Myers, Cape Coral, Bonita Springs, Estero, Marco Island, Sanibel, Lehigh Acres, Punta Gorda, Port Charlotte, and Ave Maria — across Collier, Lee, and Charlotte counties. Free same-day estimates anywhere in SWFL."
+      }
+    }
+  ]
+}

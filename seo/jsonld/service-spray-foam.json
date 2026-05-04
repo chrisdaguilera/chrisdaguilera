@@ -1,0 +1,31 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.idealinsulationinc.com/services/spray-foam-insulation-naples-swfl/#service",
+  "name": "Spray Foam Insulation in Naples & SWFL",
+  "serviceType": "Spray Foam Insulation",
+  "category": "Insulation Contractor",
+  "description": "Open-cell and closed-cell spray foam insulation for attics, walls, roof decks, crawl spaces, and commercial buildings in Naples, Fort Myers, Cape Coral, and across Southwest Florida. Cuts AC bills up to 40%, improves hurricane resilience, and qualifies for FPL rebates and the 30% federal tax credit.",
+  "url": "https://www.idealinsulationinc.com/services/spray-foam-insulation-naples-swfl/",
+  "image": "https://www.idealinsulationinc.com/hubfs/spray-foam-naples-attic.jpg",
+  "provider": { "@id": "https://www.idealinsulationinc.com/#business" },
+  "areaServed": [
+    { "@type": "City", "name": "Naples" },
+    { "@type": "City", "name": "Fort Myers" },
+    { "@type": "City", "name": "Cape Coral" },
+    { "@type": "City", "name": "Bonita Springs" },
+    { "@type": "City", "name": "Estero" },
+    { "@type": "City", "name": "Marco Island" }
+  ],
+  "audience": { "@type": "PeopleAudience", "name": "Homeowners and commercial property owners in Southwest Florida" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Spray foam options",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Open-cell spray foam (R-3.5/inch)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Closed-cell spray foam (R-7/inch)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Spray foam roof deck (hurricane retrofit)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Crawl space spray foam" } }
+    ]
+  }
+}

@@ -1,0 +1,213 @@
+# Target keyword map. One primary keyword per page (the page must rank for
+# THIS query, not many). Secondary keywords are supporting phrases the page
+# should naturally include in body copy and H2s. Track each against GSC
+# weekly once credentials are connected.
+
+# Format:
+#   url: target page (existing or planned)
+#   primary: the one keyword the page must own
+#   secondary: 3-7 phrases that should appear naturally in body / H2s
+#   intent: informational | commercial | navigational | transactional
+#   competition: low | medium | high  (subjective from SERP review)
+#   current_position: from public SERP review (May 2026); replace with GSC data later
+
+pages:
+  - url: /
+    primary: insulation contractor Naples FL
+    secondary:
+      - insulation company Naples FL
+      - SWFL insulation contractor
+      - FPL preferred insulation contractor Naples
+      - spray foam Naples
+      - bilingual insulation contractor Florida
+    intent: commercial
+    competition: high
+    current_position: ~5 for "spray foam insulation Naples FL"
+
+  - url: /services/spray-foam-insulation-naples-swfl/
+    primary: spray foam insulation Naples FL
+    secondary:
+      - open cell spray foam Naples
+      - closed cell spray foam Naples
+      - spray foam attic Naples
+      - hurricane spray foam Florida
+      - spray foam roof deck SWFL
+    intent: commercial
+    competition: high
+    current_position: ~5
+
+  - url: /blown-in-insulation-naples-swfl/
+    primary: blown-in insulation Naples FL
+    secondary:
+      - cellulose insulation Naples
+      - Rockwool attic Naples
+      - blown-in attic Naples cost
+      - FPL rebate attic Naples
+    intent: commercial
+    competition: medium
+    current_position: TO_FETCH
+
+  - url: /areas-served-swfl
+    primary: insulation services SWFL
+    secondary:
+      - insulation contractor Collier County
+      - insulation contractor Lee County
+      - insulation contractor Charlotte County
+    intent: navigational
+    competition: low
+    current_position: TO_FETCH
+
+  - url: /services/insulation-removal-naples
+    primary: insulation removal Naples FL
+    secondary:
+      - storm damaged insulation removal
+      - rodent contaminated insulation
+      - water damaged attic Naples
+      - HEPA insulation removal SWFL
+    intent: commercial
+    competition: low
+    current_position: TO_FETCH
+
+  - url: /commercial-insulation-contractors-naples-swfl-energy-efficiency
+    primary: commercial insulation Naples FL
+    secondary:
+      - warehouse insulation Naples
+      - office building insulation SWFL
+      - commercial spray foam Florida
+    intent: commercial
+    competition: low
+    current_position: TO_FETCH
+
+  - url: /insulation-contractor-for-builders-naples-fl-swfl
+    primary: builder insulation Naples FL
+    secondary:
+      - GC insulation partner SWFL
+      - new construction insulation Florida
+      - subcontractor insulation Naples
+    intent: B2B
+    competition: low
+    current_position: TO_FETCH
+
+# ---- New service-by-city pages (to be built; tracked from day 1) ----
+
+  - url: /services/spray-foam-insulation-fort-myers
+    primary: spray foam insulation Fort Myers FL
+    secondary:
+      - spray foam Fort Myers cost
+      - attic spray foam Fort Myers
+      - hurricane spray foam Lee County
+    intent: commercial
+    competition: high
+    current_position: not_indexed
+
+  - url: /services/spray-foam-insulation-cape-coral
+    primary: spray foam insulation Cape Coral FL
+    secondary:
+      - canal home spray foam Cape Coral
+      - closed cell foam Cape Coral
+      - hurricane insulation Cape Coral
+    intent: commercial
+    competition: high
+    current_position: not_indexed
+
+  - url: /services/attic-insulation-fort-myers
+    primary: attic insulation Fort Myers FL
+    secondary:
+      - FPL rebate Fort Myers
+      - blown-in attic Fort Myers
+      - attic R-value Florida code
+    intent: commercial
+    competition: high
+    current_position: blog post ranking ~6 — service page should outrank
+
+  - url: /services/attic-insulation-cape-coral
+    primary: attic insulation Cape Coral FL
+    secondary:
+      - FPL rebate Cape Coral
+      - blown-in attic Cape Coral
+    intent: commercial
+    competition: medium
+    current_position: not_indexed
+
+  - url: /services/blown-in-insulation-fort-myers
+    primary: blown-in insulation Fort Myers FL
+    secondary:
+      - cellulose attic Fort Myers
+      - Rockwool Fort Myers
+    intent: commercial
+    competition: medium
+    current_position: not_indexed
+
+  - url: /services/insulation-removal-fort-myers
+    primary: insulation removal Fort Myers FL
+    secondary:
+      - rodent contaminated insulation Fort Myers
+      - storm damaged insulation Lee County
+    intent: commercial
+    competition: low
+    current_position: not_indexed
+
+  - url: /services/spray-foam-insulation-bonita-springs
+    primary: spray foam insulation Bonita Springs FL
+    secondary:
+      - attic spray foam Bonita Springs
+      - hurricane spray foam Lee County
+    intent: commercial
+    competition: medium
+    current_position: not_indexed
+
+  - url: /services/spray-foam-insulation-marco-island
+    primary: spray foam insulation Marco Island FL
+    secondary:
+      - coastal home spray foam Marco Island
+      - closed cell roof deck Marco Island
+    intent: commercial
+    competition: low
+    current_position: not_indexed
+
+  - url: /fpl-rebate-naples
+    primary: FPL insulation rebate Naples
+    secondary:
+      - FPL ceiling insulation rebate
+      - $220 FPL rebate
+      - FPL participating contractor Naples
+    intent: transactional
+    competition: low
+    current_position: not_indexed
+
+  - url: /federal-tax-credit-insulation-florida
+    primary: 30% federal tax credit insulation Florida
+    secondary:
+      - Section 25C insulation credit
+      - Energy Efficient Home Improvement Credit Florida
+      - tax credit spray foam SWFL
+    intent: informational/transactional
+    competition: low
+    current_position: not_indexed
+
+# ---- Tracking groups (used by the future audit script) ----
+
+tracking_groups:
+  - name: priority_local_money
+    queries:
+      - spray foam insulation Naples FL
+      - spray foam insulation Fort Myers FL
+      - spray foam insulation Cape Coral FL
+      - attic insulation Naples FL
+      - attic insulation Fort Myers FL
+      - attic insulation Cape Coral FL
+      - insulation contractor Naples FL
+      - insulation contractor Fort Myers FL
+  - name: rebate_intent
+    queries:
+      - FPL insulation rebate Naples
+      - FPL ceiling insulation rebate
+      - Florida insulation tax credit
+      - Section 25C insulation
+  - name: long_tail_informational
+    queries:
+      - how much does spray foam cost in Naples
+      - is spray foam worth it in Florida
+      - best attic insulation for Florida
+      - open cell vs closed cell Florida
+      - hurricane spray foam roof deck

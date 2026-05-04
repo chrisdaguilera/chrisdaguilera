@@ -1,0 +1,28 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.idealinsulationinc.com/blown-in-insulation-naples-swfl/#service",
+  "name": "Blown-In Attic Insulation in Naples & SWFL",
+  "serviceType": "Blown-In Insulation",
+  "category": "Insulation Contractor",
+  "description": "Blown-in cellulose, fiberglass, and Rockwool attic insulation for Southwest Florida homes. Most jobs done in a single day. Qualifies for the FPL $220 instant rebate when bringing attic R-value up from below R-8.",
+  "url": "https://www.idealinsulationinc.com/blown-in-insulation-naples-swfl/",
+  "image": "https://www.idealinsulationinc.com/hubfs/blown-in-attic-naples.jpg",
+  "provider": { "@id": "https://www.idealinsulationinc.com/#business" },
+  "areaServed": [
+    { "@type": "City", "name": "Naples" },
+    { "@type": "City", "name": "Fort Myers" },
+    { "@type": "City", "name": "Cape Coral" },
+    { "@type": "City", "name": "Bonita Springs" },
+    { "@type": "City", "name": "Estero" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Blown-in materials",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Blown-in cellulose (R-3.7/inch)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Blown-in fiberglass (R-2.5/inch)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rockwool / mineral wool (fire & sound rated)" } }
+    ]
+  }
+}

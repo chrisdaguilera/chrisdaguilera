@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.idealinsulationinc.com/services/insulation-removal-naples/#service",
+  "name": "Insulation Removal in Naples & SWFL",
+  "serviceType": "Insulation Removal",
+  "category": "Insulation Contractor",
+  "description": "Professional insulation removal for storm-damaged, water-damaged, rodent-contaminated, or end-of-life attic insulation. HEPA-filtered vacuum trucks, OSHA-compliant containment, and same-day removal across Naples, Fort Myers, Cape Coral, and SWFL. Replacement options scoped at the same visit.",
+  "url": "https://www.idealinsulationinc.com/services/insulation-removal-naples/",
+  "image": "https://www.idealinsulationinc.com/hubfs/insulation-removal-naples.jpg",
+  "provider": { "@id": "https://www.idealinsulationinc.com/#business" },
+  "areaServed": [
+    { "@type": "City", "name": "Naples" },
+    { "@type": "City", "name": "Fort Myers" },
+    { "@type": "City", "name": "Cape Coral" },
+    { "@type": "City", "name": "Bonita Springs" },
+    { "@type": "City", "name": "Estero" }
+  ]
+}

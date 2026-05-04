@@ -1,0 +1,25 @@
+{
+  "_comment": "Drop one of these on every non-homepage page. Replace the itemListElement entries with the actual breadcrumb path. Use this exact pattern: Home > Section > Page.",
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.idealinsulationinc.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Services",
+      "item": "https://www.idealinsulationinc.com/services/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Spray Foam Insulation Naples FL",
+      "item": "https://www.idealinsulationinc.com/services/spray-foam-insulation-naples-swfl/"
+    }
+  ]
+}

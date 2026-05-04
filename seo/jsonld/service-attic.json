@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.idealinsulationinc.com/services/attic-insulation/#service",
+  "name": "Attic Insulation Upgrades in Naples & SWFL",
+  "serviceType": "Attic Insulation",
+  "category": "Insulation Contractor",
+  "description": "Attic insulation upgrades — spray foam, blown-in cellulose, fiberglass, and Rockwool — sized to Florida code for Climate Zone 2. FPL Preferred Contractor: instant $220 rebate processed at the time of installation when bringing attic R-value up from below R-8. Free thermal scan and energy assessment included.",
+  "url": "https://www.idealinsulationinc.com/services/attic-insulation/",
+  "image": "https://www.idealinsulationinc.com/hubfs/attic-insulation-naples.jpg",
+  "provider": { "@id": "https://www.idealinsulationinc.com/#business" },
+  "areaServed": [
+    { "@type": "City", "name": "Naples" },
+    { "@type": "City", "name": "Fort Myers" },
+    { "@type": "City", "name": "Cape Coral" },
+    { "@type": "City", "name": "Bonita Springs" },
+    { "@type": "City", "name": "Estero" },
+    { "@type": "City", "name": "Marco Island" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Attic insulation options",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Open-cell spray foam attic" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Closed-cell spray foam attic / roof deck" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Blown-in cellulose attic top-up" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fiberglass batts (R-30, R-38)" } }
+    ]
+  }
+}

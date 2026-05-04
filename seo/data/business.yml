@@ -1,0 +1,117 @@
+# Single source of truth for Ideal Insulation NAP and structured-data fields.
+# Every JSON-LD block, citation edit, page footer, and email signature derives
+# from this file. If any value is wrong, fix it HERE and re-generate the
+# JSON-LD blocks in seo/jsonld/.
+
+name: Ideal Insulation
+legal_name: Ideal Insulation Enterprises Inc
+tagline: SWFL's #1 Insulation Contractor Since 2013
+
+contact:
+  phone: "+1-239-455-2002"
+  phone_display: "(239) 455-2002"
+  tel_href: "tel:+12394552002"
+  email: estimates@idealinsulationinc.com
+
+website:
+  url: https://www.idealinsulationinc.com
+  canonical_host: www.idealinsulationinc.com
+
+address:
+  # Canonical operating address (per user, 2026-05). Must match the Google
+  # Business Profile address exactly. Sunbiz still lists 2070 39th St SW;
+  # update Sunbiz separately so state record aligns.
+  street: 4950 Golden Gate Pkwy
+  city: Naples
+  region: FL
+  postal_code: # TO_VERIFY — confirm zip for 4950 Golden Gate Pkwy (likely 34116)
+  country: US
+
+geo:
+  # TO_VERIFY — approximate; confirm with Google Maps before publishing schema.
+  latitude: 26.1644
+  longitude: -81.7440
+
+hours:
+  # TO_VERIFY with the user. Defaults below are typical for SWFL contractors.
+  monday: "07:00-17:00"
+  tuesday: "07:00-17:00"
+  wednesday: "07:00-17:00"
+  thursday: "07:00-17:00"
+  friday: "07:00-17:00"
+  saturday: "08:00-13:00"
+  sunday: closed
+
+founded: 2013
+price_range: "$$"
+
+services:
+  - name: Spray Foam Insulation
+    slug: spray-foam-insulation
+    keywords: [open cell, closed cell, attic spray foam, roof deck spray foam]
+  - name: Blown-In Insulation
+    slug: blown-in-insulation
+    keywords: [cellulose, fiberglass, Rockwool, attic blown-in]
+  - name: Fiberglass Batt Insulation
+    slug: batt-insulation
+    keywords: [fiberglass batts, wall batts, R-19, R-30]
+  - name: Attic Insulation
+    slug: attic-insulation
+    keywords: [attic upgrade, R-value upgrade, FPL rebate]
+  - name: Insulation Removal
+    slug: insulation-removal
+    keywords: [old insulation removal, rodent contamination, post-storm]
+  - name: Commercial Insulation
+    slug: commercial-insulation
+    keywords: [commercial spray foam, warehouse, office]
+  - name: Builder Insulation
+    slug: builder-insulation
+    keywords: [new construction, GC, builder partnerships]
+
+areas_served:
+  # In order of business priority. First three drive most search volume.
+  - { city: Naples,           county: Collier,   priority: 1 }
+  - { city: Fort Myers,       county: Lee,       priority: 1 }
+  - { city: Cape Coral,       county: Lee,       priority: 1 }
+  - { city: Bonita Springs,   county: Lee,       priority: 2 }
+  - { city: Estero,           county: Lee,       priority: 2 }
+  - { city: Marco Island,     county: Collier,   priority: 2 }
+  - { city: Sanibel,          county: Lee,       priority: 3 }
+  - { city: Lehigh Acres,     county: Lee,       priority: 3 }
+  - { city: Punta Gorda,      county: Charlotte, priority: 3 }
+  - { city: Port Charlotte,   county: Charlotte, priority: 3 }
+  - { city: Ave Maria,        county: Collier,   priority: 3 }
+  - { city: Golden Gate,      county: Collier,   priority: 3 }
+  - { city: Immokalee,        county: Collier,   priority: 3 }
+
+trust_signals:
+  - FPL Preferred Contractor (instant $220 rebate processing)
+  - Google Guaranteed
+  - Fully licensed and insured (FL)
+  - 9 trucks, 20 certified installers
+  - Lifetime transferable workmanship warranty
+  - In-house crews — no subcontractors
+  - Bilingual (English / Spanish)
+  - Free same-day estimates and thermal scans
+  - 30% federal tax credit (Section 25C) documentation help
+
+# sameAs URLs for the LocalBusiness schema. These should all eventually
+# resolve to the canonical NAP. Items marked NEEDS_FIX are out of sync
+# and tracked in seo/findings/citation-runbook.md.
+same_as:
+  - { url: "https://www.facebook.com/Ideal-Insulation-Enterprise-Inc-1222507037825337/", status: NEEDS_FIX, note: "Page name says 'Enterprise' (singular). Update to 'Ideal Insulation'." }
+  - { url: "https://www.yelp.com/biz/ideal-insulations-naples", status: NEEDS_FIX, note: "Listed as 'Ideal Insulations' (plural). Submit name correction." }
+  - { url: "https://www.yellowpages.com/naples-fl/mip/ideal-insulation-enterprises-inc-6316310", status: NEEDS_FIX, note: "Duplicate listing — claim and merge or delete." }
+  - { url: "https://www.yellowpages.com/naples-fl/mip/ideal-insulation-inc-537773636", status: NEEDS_FIX, note: "Duplicate listing — claim and merge or delete." }
+  - { url: "https://www.yellowpages.com/naples-fl/mip/ideal-insulation-inc-462413349", status: NEEDS_FIX, note: "Duplicate listing — claim and merge or delete." }
+  - { url: "https://www.bbb.org/", status: TODO, note: "Confirm BBB listing or create one with canonical NAP." }
+  - { url: "https://search.sunbiz.org/Inquiry/corporationsearch/SearchResultDetail?inquirytype=EntityName&directionType=Initial&searchNameOrder=IDEALINSULATIONENTERPRISES%20P130000802200", status: NEEDS_FIX, note: "Sunbiz lists 2070 39th St SW. File annual report amendment to 4950 Golden Gate Pkwy." }
+  - { url: "https://www.thebluebook.com/iProView/1642814/ideal-insulation-enterprises-inc/", status: TO_VERIFY, note: "Confirm NAP matches." }
+  - { url: "https://www.chamberofcommerce.com/united-states/florida/naples/insulation-contractor/2001625133-ideal-insulation-enterprises-inc", status: TO_VERIFY }
+
+aggregate_rating:
+  # Pull from Google Business Profile once accessible. Don't publish schema
+  # with placeholder values — real rating must come from real reviews.
+  source: Google Business Profile
+  rating_value: TO_FETCH
+  review_count: TO_FETCH
