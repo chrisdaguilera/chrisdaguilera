@@ -10,27 +10,25 @@ Base URL: https://hendryprop.com/
 
 ## Search workflow
 
-### Step 1 — search by address
+### Step 1 — search by address (Playwright MCP)
 
-Property search page: https://hendryprop.com/property-search/
+Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Hendry-specific notes:
 
-Hendry uses a Grizzly Logic / qPublic-style search backend. Use:
+- **Search URL:** `https://hendryprop.com/property-search/`
+- **Search mode:** the address search is the default mode on this page. If a search-type tab/dropdown is shown, choose "Address".
+- **Inputs to fill:**
+  - Street Number → number only
+  - Street Name → name only (no suffix, no direction)
+- **Submit:** the "Search" button.
+- **Results list:** click the parcel link whose Site Address matches.
+- **Detail page URL:** usually contains a `KeyValue=` or `pid=` parameter — save as `appraiser_url`.
 
-```
-firecrawl_scrape_page
-  url: https://hendryprop.com/property-search/
-  instructions: "Use the address search. Enter the street number and street name (no suffix, no direction). Submit. From the results list, click the parcel whose Site Address matches <full address>. Return the full parcel detail / property card page."
-  waitFor: 4000
-  formats: ["markdown"]
-  output_hint: "Owner, parcel ID, site address, year built, heated/living area, total area under roof, base area, garage area, exterior wall, roof, stories, beds, baths, pool, and the parcel detail URL."
-```
-
-If the on-site search fails, fall back to a Google site-scoped search:
+If the on-site search returns nothing or errors out, fall back to a Google site-scoped search via Firecrawl:
 ```
 firecrawl_search_data
   query: "site:hendryprop.com <street number> <street name> <city>"
 ```
-…then scrape the first result.
+…then `browser_navigate` the first result.
 
 ### Step 2 — parse the parcel detail page
 

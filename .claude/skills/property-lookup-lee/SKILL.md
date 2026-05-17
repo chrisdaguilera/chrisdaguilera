@@ -10,22 +10,21 @@ Base URL: https://www.leepa.org/
 
 ## Search workflow
 
-Lee has the best URL-driven search of the five counties — you can hit search results directly.
+**Important:** leepa.org is an ASP.NET WebForms site with `__VIEWSTATE` postbacks. Direct GETs to `PropertySearch.aspx?StrNumber=...&StrName=...` will NOT execute a search — they just render the empty form. You must drive the form via a browser MCP.
 
-### Step 1 — search by address
+### Step 1 — search by address (Playwright MCP)
 
-Property search page: https://www.leepa.org/search/propertysearch.aspx
+Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Lee-specific notes:
 
-Lee supports a URL with query parameters once you've done a search (the page does a server postback that sets the form, then you click a STRAP link). The reliable approach is:
-
-```
-firecrawl_scrape_page
-  url: https://www.leepa.org/search/propertysearch.aspx
-  instructions: "Click the 'Address' search tab. Enter the street number into 'Street Number' and the street name (no suffix, no direction) into 'Street Name'. If the city is known, select it from the City dropdown. Submit the search. From the results table, click the STRAP number whose Site Address matches <full address>. Return the full property record page."
-  waitFor: 4000
-  formats: ["markdown"]
-  output_hint: "Owner, STRAP, site address, year built, total living area, total area under roof, garage area, construction, roof, beds, baths, pool, and the detail page URL."
-```
+- **Search URL:** `https://www.leepa.org/Search/PropertySearch.aspx`
+- **Search mode:** the search page has tabs near the top (Parcel/STRAP, Owner, Address, etc.). Click the **Address** tab. Within Address, there's also a sub-toggle for "Site Info" vs "Owner Info" — leave it on **Site Info**.
+- **Inputs to fill:**
+  - "Street Number" → the number from the address
+  - "Street Name" → the name only (no `RD`, `ST`, `CIR`, `BLVD`, `N`, `S`, etc.)
+  - "Postal Code" → optional but recommended when you have it
+- **Submit:** the "Search" / "Submit" button. There is no Enter-key fallback — you must click.
+- **Results table:** click the **STRAP number link** (not the address column) of the row whose Site Address matches.
+- **Detail page URL:** will look like `https://www.leepa.org/Display/DisplayParcel.aspx?FolioID=NNNNNNNN` once you land on it — that's the value to save as `appraiser_url`.
 
 If multiple results, prefer the row whose Site Address exactly matches the input street number and street name.
 

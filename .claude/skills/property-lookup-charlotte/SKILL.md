@@ -10,22 +10,20 @@ Base URL: https://www.ccappraiser.com/
 
 ## Search workflow
 
-### Step 1 — search by address
+### Step 1 — search by address (Playwright MCP)
 
-Real Property search entry: https://www.ccappraiser.com/RPSearchEnter.asp
+Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Charlotte-specific notes:
 
-The form posts to a results page. Use:
+- **Search URL:** `https://www.ccappraiser.com/RPSearchEnter.asp`
+- **Search mode:** click / select the **"Search by Address"** option (radio or tab depending on browser width).
+- **Inputs to fill:**
+  - Street Number → number only
+  - Street Name → name only (no suffix, no direction)
+- **Submit:** the "Search" button.
+- **Results list:** click the parcel link whose **Situs Address** matches.
+- **Detail page URL:** looks like `https://www.ccappraiser.com/Show_Parcel.asp?acct=<account_number>` — save as `appraiser_url`.
 
-```
-firecrawl_scrape_page
-  url: https://www.ccappraiser.com/RPSearchEnter.asp
-  instructions: "Select the 'Search by Address' option. Enter the street number and street name (no suffix, no direction). Submit the search. From the results list, click the parcel whose 'Situs Address' best matches <full address>. Return the full property record page."
-  waitFor: 4000
-  formats: ["markdown"]
-  output_hint: "Owner name, account/parcel number, situs address, year built, total living area, building footprint/base area, garage area, construction, roof, beds, baths, pool, and the detail URL."
-```
-
-If the address search returns too many results, retry by selecting 'Search by Owner' with just the owner's last name if known.
+If the address search returns too many results, retry with **"Search by Owner"** using just the owner's last name (if known).
 
 ### Step 2 — parse the detail page
 

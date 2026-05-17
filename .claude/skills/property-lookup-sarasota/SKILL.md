@@ -10,20 +10,20 @@ Base URL: https://www.sc-pa.com/
 
 ## Search workflow
 
-### Step 1 — search by address
+### Step 1 — search by address (Playwright MCP)
 
-Real property search page: https://www.sc-pa.com/search/real-property-search/
+Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Sarasota-specific notes:
 
-The search supports multiple modes (address, owner, parcel, sales). For our use, address:
+- **Search URL:** `https://www.sc-pa.com/search/real-property-search/`
+- **Search mode:** select the **"Address Search"** mode (sometimes a tab, sometimes a dropdown above the inputs).
+- **Inputs to fill:**
+  - Street Number → number only
+  - Street Name → name only (no suffix, no direction)
+- **Submit:** the "Search" button.
+- **Results list:** click the parcel link whose **Site Address** matches.
+- **Detail page URL:** the "Property Card" — save as `appraiser_url`.
 
-```
-firecrawl_scrape_page
-  url: https://www.sc-pa.com/search/real-property-search/
-  instructions: "Use the 'Address Search' mode. Enter the street number and street name (no suffix, no direction). Submit. From the results, click the parcel whose Site Address matches <full address>. Return the full Property Card / detail page."
-  waitFor: 4000
-  formats: ["markdown"]
-  output_hint: "Owner, parcel ID, site address, year built, living area (heated), total under roof, base area, garage area, exterior wall, roof, stories, beds, baths, pool, and the property card URL."
-```
+Sarasota's site is friendlier than Lee/Charlotte/Collier — the search page often works via plain HTTPS GET once you know the parcel ID, and the property card may render even with Firecrawl. But the **initial address-to-parcel-ID step still requires the browser MCP** because the address search is a JS-driven AJAX call.
 
 ### Step 2 — parse the property card
 

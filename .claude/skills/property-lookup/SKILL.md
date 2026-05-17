@@ -28,11 +28,22 @@ A structured block of fields used to price a homeowner policy:
 - `pool` (Y/N, plus pool sqft if listed)
 - `appraiser_url` (deep link back to the property record so the user can verify)
 
+## Prerequisite — browser MCP
+
+All five county appraiser sites are ASP.NET WebForms with `__VIEWSTATE` postbacks (or JS-rendered React equivalents). Plain HTTP scrapers (WebFetch, Firecrawl's basic scrape, Apify's single-URL scrape) **cannot** drive the address-search form on most of them. You need a real browser driver:
+
+- **Preferred:** Playwright MCP (`@playwright/mcp`). Tools surface as `mcp__playwright__browser_navigate`, `_click`, `_type`, `_select_option`, `_snapshot`, `_wait_for`, etc.
+- **Acceptable fallback:** browser-use MCP, Chrome DevTools MCP, or any other MCP that exposes a controllable browser.
+
+See the repo `README.md` (`.claude/skills/README.md`) for install steps.
+
+If no browser MCP is available in the session, tell the user up front rather than trying to scrape with WebFetch — you'll just get blocked or get back the empty form.
+
 ## Workflow
 
 1. **Parse the address.** Pull out street, city, state, zip.
 2. **Resolve county.** Map the city (and zip as tiebreaker) to a county using the table below. If ambiguous (Englewood spans Sarasota and Charlotte; some 339xx zips cross Lee/Charlotte), ask the user which county.
-3. **Invoke the county-specific skill** — they hold the URL and search workflow:
+3. **Invoke the county-specific skill** — they hold the URL, form-interaction steps, and field mapping:
    - Collier → `property-lookup-collier`
    - Lee → `property-lookup-lee`
    - Charlotte → `property-lookup-charlotte`
@@ -40,6 +51,25 @@ A structured block of fields used to price a homeowner policy:
    - Hendry → `property-lookup-hendry`
 4. **Present the structured fields** back to the user.
 5. **Offer to push to Jobber.** If the user confirms (or already asked for it), use the `property-to-jobber` skill to attach the data to a Jobber client/request/quote.
+
+## Shared browser-navigation pattern
+
+All five county skills follow this same shape — the county skill only specifies the search page URL, the right tab/control labels, and the field mapping for the result.
+
+1. `browser_navigate` → the county's search page URL.
+2. `browser_snapshot` → identify the address-tab control and the street-number / street-name inputs by their accessible names. Capture the `ref` for each.
+3. `browser_click` on the Address tab if the page opens on a different search mode.
+4. `browser_type` the street number into the number field, then the street name (no suffix, no direction unless the county explicitly requires it) into the name field.
+5. `browser_click` the Search / Submit button.
+6. `browser_wait_for` the results table to appear.
+7. `browser_snapshot` the results. If multiple matches, pick the row whose Site Address matches the input. If none match, return that to the user.
+8. `browser_click` the matching parcel link.
+9. `browser_wait_for` the detail page.
+10. `browser_snapshot` the detail page and extract fields per the county skill's mapping table.
+11. Capture the current URL as `appraiser_url` (use `browser_evaluate` with `() => location.href` if needed).
+12. `browser_close` when done.
+
+If a snapshot returns nothing useful (occasionally happens on heavy pages), `browser_wait_for` a known-stable element (e.g., the "Owner" label) and re-snapshot.
 
 ## City → county map
 

@@ -36,12 +36,38 @@ ln -s "$(pwd)/.claude/skills/property-to-jobber"        ~/.claude/skills/propert
 
 ## Required tools / MCP servers
 
-For the lookups (one of these):
-- **Firecrawl** (recommended) — handles JS-heavy appraiser sites better. The skills assume `mcp__*__firecrawl_scrape_page` and `mcp__*__firecrawl_search_data` are available.
-- **WebFetch** — Claude Code's built-in. Works for the simpler county sites; will fall back to Firecrawl for the harder ones.
+### Browser MCP (REQUIRED for lookups)
 
-For the Jobber push:
-- **Jobber MCP** — needs `jobber_find_client`, `jobber_create_client`, `jobber_create_request`, `jobber_create_quote`, and `jobber_add_note_to_request`.
+The Florida county appraiser sites are ASP.NET WebForms with `__VIEWSTATE` postbacks. Plain HTTP scrapers (WebFetch, Firecrawl `scrape_page`, Apify `scrape_single_url`) **cannot** drive the address-search form on them — they'll just return the empty form. You need a real browser MCP.
+
+**Recommended:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) (Microsoft, free, no account).
+
+Install once on the machine running Claude Code:
+```bash
+npm install -g @playwright/mcp@latest
+npx playwright install chromium
+```
+
+Then add to your Claude Code MCP config (`~/.claude.json` or via `claude mcp add`):
+```bash
+claude mcp add playwright -- npx -y @playwright/mcp@latest
+```
+
+Verify after a restart:
+```bash
+claude mcp list
+# should show: playwright: ✓ Connected
+```
+
+The skills assume tools named `mcp__playwright__browser_navigate`, `_snapshot`, `_click`, `_type`, `_select_option`, `_wait_for`, and `_close`. Other browser MCPs (browser-use, Chrome DevTools MCP) work too if they expose equivalent primitives.
+
+### Firecrawl (optional fallback)
+
+Useful for Google site-scoped searches when the appraiser's on-site search fails. Already present in your current setup as `mcp__*__firecrawl_search_data`.
+
+### Jobber MCP (for the push step)
+
+Needs `jobber_find_client`, `jobber_create_client`, `jobber_create_request`, `jobber_create_quote`, and `jobber_add_note_to_request`. Already present in your current setup.
 
 ## Example usage
 
