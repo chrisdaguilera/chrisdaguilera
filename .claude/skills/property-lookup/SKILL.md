@@ -28,16 +28,25 @@ A structured block of fields used to price a homeowner policy:
 - `pool` (Y/N, plus pool sqft if listed)
 - `appraiser_url` (deep link back to the property record so the user can verify)
 
-## Prerequisite — browser MCP
+## Lookup strategies (pick by what's available in the session)
 
-All five county appraiser sites are ASP.NET WebForms with `__VIEWSTATE` postbacks (or JS-rendered React equivalents). Plain HTTP scrapers (WebFetch, Firecrawl's basic scrape, Apify's single-URL scrape) **cannot** drive the address-search form on most of them. You need a real browser driver:
+The county search **forms** are ASP.NET WebForms with `__VIEWSTATE` postbacks — no plain scraper can submit them. But you almost never need the form:
 
-- **Preferred:** Playwright MCP (`@playwright/mcp`). Tools surface as `mcp__playwright__browser_navigate`, `_click`, `_type`, `_select_option`, `_snapshot`, `_wait_for`, etc.
-- **Acceptable fallback:** browser-use MCP, Chrome DevTools MCP, or any other MCP that exposes a controllable browser.
+**Strategy A — search-then-deep-link (default; needs only Firecrawl search + scrape, proven to work):**
+1. `firecrawl_search_data` with `"<street number> <street name>" <city> parcel OR STRAP OR folio OR APN` — Zillow/Realtor/Homes.com snippets reliably contain the parcel number, plus sqft / beds / baths / year built for cross-checking. City permit PDFs in results often contain the county's internal ID (e.g., Lee's FolioID) and roof-permit history.
+2. A second site-scoped search (`site:<county appraiser domain> <address>`) often surfaces the parcel detail page URL directly.
+3. `firecrawl_scrape_page` the county's **deep-link detail URL** (plain GET — these render without the form; see each county skill for the URL pattern and which query param works).
+4. Extract fields per the county skill's mapping table; cross-check sqft/beds/baths against the listing-site snippets from step 1.
 
-See the repo `README.md` (`.claude/skills/README.md`) for install steps.
+**Strategy B — browser MCP (only if `mcp__playwright__browser_*` tools exist):** drive the search form per the shared pattern below. Use when Strategy A can't resolve a parcel ID (very new construction, unindexed addresses).
 
-If no browser MCP is available in the session, tell the user up front rather than trying to scrape with WebFetch — you'll just get blocked or get back the empty form.
+If neither resolves the parcel, report exactly which step failed rather than retrying the same call.
+
+### Known environment constraints (Zapier-wrapped Firecrawl/Apify)
+
+- `firecrawl_run_agent` fails with "Refusal: max credits" at 0 credits — unusable; don't retry.
+- JSON API endpoints (ArcGIS REST `f=json`, Census geocoder) abort with `document_antibot` — the wrapper only passes HTML. Don't burn calls on APIs.
+- All synchronous calls are capped at ~30s server-side; slow pages time out. Prefer fast deep-link pages; for slow ones, `apify_run_actor` (async) + `apify_fetch_dataset_items` beats the cap.
 
 ## Workflow
 
@@ -52,7 +61,7 @@ If no browser MCP is available in the session, tell the user up front rather tha
 4. **Present the structured fields** back to the user.
 5. **Offer to push to Jobber.** If the user confirms (or already asked for it), use the `property-to-jobber` skill to attach the data to a Jobber client/request/quote.
 
-## Shared browser-navigation pattern
+## Shared browser-navigation pattern (Strategy B only)
 
 All five county skills follow this same shape — the county skill only specifies the search page URL, the right tab/control labels, and the field mapping for the result.
 

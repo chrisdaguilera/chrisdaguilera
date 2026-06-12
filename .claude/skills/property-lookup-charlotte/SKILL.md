@@ -10,7 +10,11 @@ Base URL: https://www.ccappraiser.com/
 
 ## Search workflow
 
-### Step 1 — search by address (Playwright MCP)
+### Primary: search-then-deep-link (no browser needed)
+
+Per the `property-lookup` Strategy A: find the account/parcel number via `firecrawl_search_data` (Zillow/Realtor snippets, or `site:ccappraiser.com <address>`), then `firecrawl_scrape_page` the detail page directly — `https://www.ccappraiser.com/Show_Parcel.asp?acct=<account_number>&gen=T&tax=T&bld=T&oth=T&sal=T&lnd=T&leg=T` is a plain GET (the `&bld=T` etc. flags expand the building/sales/land sections). Cross-check sqft against the listing snippets.
+
+### Fallback: drive the search form (Playwright MCP, if available)
 
 Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Charlotte-specific notes:
 

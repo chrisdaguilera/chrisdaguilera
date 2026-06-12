@@ -10,7 +10,11 @@ Base URL: https://hendryprop.com/
 
 ## Search workflow
 
-### Step 1 — search by address (Playwright MCP)
+### Primary: search-then-deep-link (no browser needed)
+
+Per the `property-lookup` Strategy A: get the parcel ID via `firecrawl_search_data` (or `site:hendryprop.com <address>`), then scrape the result's detail URL directly (Grizzly/qPublic-style pages with `KeyValue=` or `pid=` params are plain GETs).
+
+### Fallback: drive the search form (Playwright MCP, if available)
 
 Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Hendry-specific notes:
 

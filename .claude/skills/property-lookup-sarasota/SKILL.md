@@ -10,7 +10,11 @@ Base URL: https://www.sc-pa.com/
 
 ## Search workflow
 
-### Step 1 — search by address (Playwright MCP)
+### Primary: search-then-deep-link (no browser needed)
+
+Per the `property-lookup` Strategy A: get the parcel ID via `firecrawl_search_data`, then scrape `https://www.sc-pa.com/propertysearch/parcel/details/<parcel_id>` directly (plain GET). A `site:sc-pa.com <address>` search also surfaces detail pages.
+
+### Fallback: drive the search form (Playwright MCP, if available)
 
 Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Sarasota-specific notes:
 

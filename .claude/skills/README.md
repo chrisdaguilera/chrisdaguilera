@@ -36,9 +36,18 @@ ln -s "$(pwd)/.claude/skills/property-to-jobber"        ~/.claude/skills/propert
 
 ## Required tools / MCP servers
 
-### Browser MCP (REQUIRED for lookups)
+### Firecrawl search + scrape (sufficient for lookups — the default path)
 
-The Florida county appraiser sites are ASP.NET WebForms with `__VIEWSTATE` postbacks. Plain HTTP scrapers (WebFetch, Firecrawl `scrape_page`, Apify `scrape_single_url`) **cannot** drive the address-search form on them — they'll just return the empty form. You need a real browser MCP.
+The lookups work **without a browser MCP** using the search-then-deep-link strategy (see `property-lookup/SKILL.md`, Strategy A): the county *search forms* need a browser, but the *parcel detail pages* are plain GETs once you have the parcel/folio ID — and that ID is reliably findable via web search (Zillow/Realtor snippets, city permit PDFs, `site:` searches). Verified end-to-end on Lee County (leepa.org `DisplayParcel.aspx?FolioID=`).
+
+Known quirks of the Zapier-wrapped Firecrawl/Apify connectors:
+- `firecrawl_run_agent` is quota-blocked ("Refusal: max credits" at 0 used) — the skills don't rely on it.
+- JSON API endpoints abort with `document_antibot`; only HTML pages scrape.
+- ~30s server-side timeout per call; slow county pages (e.g. fieldcards.leepa.org) are best-effort.
+
+### Browser MCP (optional — fallback for unindexed parcels)
+
+For brand-new construction or addresses search can't resolve, driving the county search form needs a real browser MCP (Strategy B).
 
 **Recommended:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) (Microsoft, free, no account).
 

@@ -10,9 +10,41 @@ Base URL: https://www.leepa.org/
 
 ## Search workflow
 
-**Important:** leepa.org is an ASP.NET WebForms site with `__VIEWSTATE` postbacks. Direct GETs to `PropertySearch.aspx?StrNumber=...&StrName=...` will NOT execute a search — they just render the empty form. You must drive the form via a browser MCP.
+### Primary: search-then-deep-link (no browser needed — verified working)
 
-### Step 1 — search by address (Playwright MCP)
+**Key fact:** `https://www.leepa.org/Display/DisplayParcel.aspx?FolioID=NNNNNNNN` is a **plain GET** that renders the full parcel record to ordinary scrapers. Only the *search form* needs a browser; the detail page does not. `?STRAP=` does **not** work ("Invalid Search Request") — FolioID is the only deep-link key.
+
+1. **Find the parcel via web search** — `firecrawl_search_data` with:
+   ```
+   "<street number> <street name>" <city> parcel OR STRAP OR folio OR APN
+   ```
+   - Zillow/Realtor snippets give the STRAP (e.g. `274425P30060G2510` / `27-44-25-P3-0060G.2510`) plus sqft, beds, baths for cross-checking.
+   - **City of Fort Myers / Cape Coral permit PDFs** in results often contain the numeric FolioID directly *and* roof permit history (e.g. "Remove Existing Tile Roof and Replace…" + date = `roof_year`).
+   - If no FolioID surfaced, run a second search: `site:leepa.org <street number> <street name>` — Google has many DisplayParcel pages indexed with FolioID in the URL.
+2. **Scrape the detail page** — `firecrawl_scrape_page` on `https://www.leepa.org/Display/DisplayParcel.aspx?FolioID=NNNNNNNN` (use `waitFor: 3000`).
+3. **Read the "Certified Roll Data" block** — the page dumps the DOR NAL fields as `F01:`–`F92:`. Verified mappings:
+
+   | NAL field | Meaning                     | Output field        |
+   | --------- | --------------------------- | ------------------- |
+   | F01       | County code (46 = Lee)      | —                   |
+   | F02       | Parcel ID (STRAP, compact)  | `parcel_id`         |
+   | F08       | Just value ($)              | `just_value`        |
+   | F38       | Land value ($)              | —                   |
+   | F41       | Land sqft                   | `lot_sqft`          |
+   | F44       | Actual year built           | `year_built`        |
+   | F45       | Effective year built        | report if ≠ F44     |
+   | F47       | Living/under-roof area — **verify against listing sqft from step 1** (NAL says TOT_LVG_AREA but observed values run high, may include garage) | `living_area_sqft` (flag if it disagrees with listings) |
+   | F51       | Owner of record             | `owner_name`        |
+   | F52/F54/F56 | Site address / city / zip | `site_address`      |
+   | F65       | Subdivision name            | —                   |
+
+   The page links the official field legend: https://www.leepa.org/TaxRoll/DOR_NAL_Field_Info.pdf — scrape it once if an F-field is ambiguous.
+4. **Beds/baths/garage sub-areas:** the interactive Building/Construction sections are JS-collapsed and may not render in the scrape. Take beds/baths/living sqft from the step-1 listing snippets (they all source LEEPA anyway), and try the printable cost card `https://fieldcards.leepa.org/CurrentCostCard/Folio/NNNNNNNN` for the BAS/FGR sub-area table — note that server is slow and often times out; treat it as best-effort.
+5. Save the DisplayParcel URL as `appraiser_url`.
+
+### Fallback: drive the search form (Playwright MCP, if available)
+
+leepa.org's search is ASP.NET WebForms with `__VIEWSTATE` postbacks — direct GETs to `PropertySearch.aspx?StrNumber=...` just render the empty form.
 
 Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Lee-specific notes:
 

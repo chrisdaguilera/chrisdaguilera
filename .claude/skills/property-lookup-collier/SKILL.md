@@ -16,7 +16,11 @@ Collier's site exposes a parcel/address search at:
 
 It supports address, owner name, and folio (parcel) search.
 
-### Step 1 — search by address (Playwright MCP)
+### Primary: search-then-deep-link (no browser needed)
+
+Per the `property-lookup` Strategy A: get the folio number via `firecrawl_search_data` (Zillow/Realtor list it as "Parcel number"), then try scraping the print view `https://www.collierappraiser.com/main_search/RecordDetail.html?FolioID=<folio>` or a `site:collierappraiser.com <folio>` search result. Collier's detail pages are frame/JS-heavy — if the scrape comes back empty, fall back to the listing-snippet data (cross-check two sources) or the browser path below.
+
+### Fallback: drive the search form (Playwright MCP, if available)
 
 Follow the shared browser-navigation pattern in `property-lookup` SKILL.md. Collier-specific notes:
 
